@@ -23,6 +23,9 @@ typedef struct _image {
     unsigned int height;
 } Image;
 
+
+int minimum_width (unsigned int width, unsigned int iterator, int T);
+int minor_height (unsigned int height, unsigned int iterator, int T);
 int max(int a, int b);
 int pixel_igual(Pixel p1, Pixel p2);
 Image escala_de_cinza(Image img);

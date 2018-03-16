@@ -37,18 +37,29 @@ Image escala_de_cinza(Image img) {
     return img;
 }
 
-void blur(unsigned int h, unsigned short int pixel[512][512][3], int T, unsigned int w) {
-    for (unsigned int i = 0; i < h; ++i) {
-        for (unsigned int j = 0; j < w; ++j) {
+int minimum_height (unsigned int height, unsigned int iterator, int T) {
+  int minimum_height = (height - 1 > iterator + T/2) ? iterator + T/2 : height - 1;
+
+  return minimum_height;
+}
+
+int minimum_width (unsigned int width, unsigned int iterator, int T) {
+  int minimum = (width - 1 > iterator + T/2) ? iterator + T/2 : width - 1;
+  
+  return minimum_width;
+}
+
+void blur(unsigned int height, unsigned short int pixel[512][512][3], int T, unsigned int width) {
+    for (unsigned int line = 0; line < height; ++line) {
+        for (unsigned int column = 0; column < width; ++column) {
             Pixel media = {0, 0, 0};
 
-            int menor_h = (h - 1 > i + T/2) ? i + T/2 : h - 1;
-            int min_w = (w - 1 > j + T/2) ? j + T/2 : w - 1;
-            for(int x = (0 > i - T/2 ? 0 : i - T/2); x <= menor_h; ++x) {
-                for(int y = (0 > j - T/2 ? 0 : j - T/2); y <= min_w; ++y) {
-                    media.red += pixel[x][y][RED_COLOR];
-                    media.green += pixel[x][y][GREEN_COLOR];
-                    media.blue += pixel[x][y][BLUE_COLOR];
+
+            for(int pixel_line = (0 > line - T/2 ? 0 : line - T/2); pixel_line <= minimum_height(height,line,T); ++pixel_line) {
+                for(int pixel_column = (0 > column - T/2 ? 0 : column - T/2); pixel_column <= minimum_width(width,column,T); ++pixel_column) {
+                    media.red += pixel[pixel_line][pixel_column][RED_COLOR];
+                    media.green += pixel[pixel_line][pixel_column][GREEN_COLOR];
+                    media.blue += pixel[pixel_line][pixel_column][BLUE_COLOR];
                 }
             }
 
@@ -57,9 +68,9 @@ void blur(unsigned int h, unsigned short int pixel[512][512][3], int T, unsigned
             media.green /= T * T;
             media.blue /= T * T;
 
-            pixel[i][j][0] = media.red;
-            pixel[i][j][1] = media.green;
-            pixel[i][j][2] = media.blue;
+            pixel[line][column][RED_COLOR] = media.red;
+            pixel[line][column][GREEN_COLOR] = media.green;
+            pixel[line][column][BLUE_COLOR] = media.blue;
         }
     }
 }
