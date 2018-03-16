@@ -23,7 +23,13 @@ typedef struct _image {
     unsigned int height;
 } Image;
 
-
+void image_rotation (int quantas_vezes, Image img);
+void mirror_effect(int horizontal,unsigned short int pixel[512][512][3],
+                   unsigned int image_width,
+                   unsigned int image_height);
+void sepia_filter(unsigned short int pixel[512][512][3],
+                  unsigned int image_width,
+                  unsigned int image_height);
 int minimum_width (unsigned int width, unsigned int iterator, int T);
 int minor_height (unsigned int height, unsigned int iterator, int T);
 int max(int a, int b);
