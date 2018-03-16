@@ -44,7 +44,7 @@ O seu programa deve ser executado da seguinte forma:
 ```
 cat lena.ppm entrada.txt | ./photopobre > saida.ppm
 ```
-Este comando irá inserir na entrada do seu programa a imagem “lena.ppm” 
+Este comando irá inserir na entrada do seu programa a imagem “lena.ppm”
 e o que estiver escrito no arquvido de entrada.txt.
 Este arquivo de entrada pode ser utilizado para descrever quantas e quais
 operações vão ser feitas nesta imagem. Por exemplo:
@@ -88,3 +88,15 @@ o RGB, do inglês Red, Green e Blue (Vermelho, Verde e Azul).
 Cada componente varia de 0 a 255, sendo 0 a ausência daquela cor,
 e 255 a total presença daquela cor.
 
+
+Compilar o Photopobre
+------
+Para compilar no MacOS é necessário criar um arquivo binário para cada arquivo .c:
+
+```
+$ gcc -o main -c main.c -Ifilters
+$ gcc -o photofilters -c photofilters.c
+$ gcc -o photopobre main photofilters
+$ cat lena/lena.ppm entrada.txt | ./photopobre > saida.ppm
+
+```
