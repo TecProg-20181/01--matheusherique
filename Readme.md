@@ -96,7 +96,8 @@ Para compilar no MacOS é necessário criar um arquivo binário para cada arquiv
 ```
 $ gcc -o main -c main.c -Ifilters
 $ gcc -o photofilters -c photofilters.c
-$ gcc -o photopobre main photofilters
+$ gcc -o inputout -c inputout.c
+$ gcc -o photopobre main photofilters inputout
 $ cat lena/lena.ppm entrada.txt | ./photopobre > saida.ppm
 
 ```
