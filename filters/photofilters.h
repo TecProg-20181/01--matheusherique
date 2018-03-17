@@ -1,4 +1,4 @@
-#ifndef PHOTOFILTERS_H_  /* Include guard */
+#ifndef PHOTOFILTERS_H_
 #define PHOTOFILTERS_H_
 #define MAX_HEIGHT 512
 #define MAX_WIDTH 512
@@ -8,19 +8,19 @@
 #define BLUE_COLOR 2
 
 typedef struct _pixel {
-    unsigned short int red;
-    unsigned short int green;
-    unsigned short int blue;
+        unsigned short int red;
+        unsigned short int green;
+        unsigned short int blue;
 } Pixel;
 
 typedef struct _image {
-    // [width][height][rgb]
-    // 0 -> r
-    // 1 -> g
-    // 2 -> b
-    unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS];
-    unsigned int width;
-    unsigned int height;
+        // [width][height][rgb]
+        // 0 -> r
+        // 1 -> g
+        // 2 -> b
+        unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS];
+        unsigned int width;
+        unsigned int height;
 } Image;
 
 void image_rotation (int quantas_vezes, Image img);
