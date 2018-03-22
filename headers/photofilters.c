@@ -1,9 +1,10 @@
 #include "photofilters.h"  /* Include the header (not strictly necessary here) */
 
 int max(int first_input, int second_input) {
+        int which_input = 0;
 
         if (first_input > second_input) {
-                int which_input = first_input;
+                which_input = first_input;
         } else {
                 which_input = second_input;
         }
@@ -27,11 +28,6 @@ int pixel_igual(Pixel p1, Pixel p2) {
 
 
 Image escala_de_cinza(Image img) {
-        /*for (unsigned int i = 0; i < img.h; ++i) {
-            for (unsigned int j = 0; j < img.w; ++j) {
-                print("%u", img.pixel[i][j][0] + img.pixel[i][j][1] + img.pixel[i][j][2]);
-            }
-           }*/
 
         for (unsigned int i = 0; i < img.height; ++i) {
                 for (unsigned int j = 0; j < img.width; ++j) {
@@ -104,29 +100,29 @@ Image rotacionar90direita(Image img) {
 }
 
 void inverter_cores(unsigned short int pixel[512][512][3],
-                    unsigned int w, unsigned int h) {
-        for (unsigned int i = 0; i < h; ++i) {
-                for (unsigned int j = 0; j < w; ++j) {
-                        pixel[i][j][RED_COLOR] = 255 - pixel[i][j][RED_COLOR];
-                        pixel[i][j][GREEN_COLOR] = 255 - pixel[i][j][GREEN_COLOR];
-                        pixel[i][j][BLUE_COLOR] = 255 - pixel[i][j][BLUE_COLOR];
+                    unsigned int width, unsigned int height) {
+        for (unsigned int line = 0; line < height; ++line) {
+                for (unsigned int column = 0; column < width; ++column) {
+                        pixel[line][column][RED_COLOR] = 255 - pixel[line][column][RED_COLOR];
+                        pixel[line][column][GREEN_COLOR] = 255 - pixel[line][column][GREEN_COLOR];
+                        pixel[line][column][BLUE_COLOR] = 255 - pixel[line][column][BLUE_COLOR];
                 }
         }
 }
 
 
 
-Image cortar_imagem(Image img, int x, int y, int width, int height) {
+Image cortar_imagem(Image img, int pixel_width, int pixel_height, int width, int height) {
         Image cortada;
 
         cortada.width = width;
         cortada.height = height;
 
-        for(int i = 0; i < height; ++i) {
-                for(int j = 0; j < width; ++j) {
-                        cortada.pixel[i][j][RED_COLOR] = img.pixel[i + y][j + x][RED_COLOR];
-                        cortada.pixel[i][j][GREEN_COLOR] = img.pixel[i + y][j + x][GREEN_COLOR];
-                        cortada.pixel[i][j][BLUE_COLOR] = img.pixel[i + y][j + x][BLUE_COLOR];
+        for(int line = 0; line < height; ++line) {
+                for(int column = 0; column < width; ++column) {
+                        cortada.pixel[line][column][RED_COLOR] = img.pixel[line + pixel_height][column + pixel_width][RED_COLOR];
+                        cortada.pixel[line][column][GREEN_COLOR] = img.pixel[line + pixel_height][column + pixel_width][GREEN_COLOR];
+                        cortada.pixel[line][column][BLUE_COLOR] = img.pixel[line + pixel_height][column + pixel_width][BLUE_COLOR];
                 }
         }
 

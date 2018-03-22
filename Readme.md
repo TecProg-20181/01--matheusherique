@@ -94,9 +94,9 @@ Compilar o Photopobre
 Para compilar no MacOS é necessário criar um arquivo binário para cada arquivo .c:
 
 ```
-$ gcc -o main -c main.c -Ifilters
-$ gcc -o photofilters -c photofilters.c
-$ gcc -o inputout -c inputout.c
+$ gcc -o main -c main.c -Iheaders
+$ gcc -o photofilters -c headers/photofilters.c
+$ gcc -o inputout -c headers/inputout.c
 $ gcc -o photopobre main photofilters inputout
 $ cat lena/lena.ppm entrada.txt | ./photopobre > saida.ppm
 

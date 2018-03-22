@@ -2,64 +2,64 @@
 #include "photofilters.h"
 
 int main() {
-        Image img;
+        Image image;
 
         // read type of image
         char p3[4];
         scanf("%s", p3);
         // read width height and color of image
         int max_color;
-        scanf("%u %u %d", &img.width, &img.height, &max_color);
+        scanf("%u %u %d", &image.width, &image.height, &max_color);
 
         // read all pixels of image
-        read_pixels_of_image(img.pixel,img.width, img.height);
+        read_pixels_of_image(image.pixel,image.width, image.height);
 
-        int n_opcoes;
-        scanf("%d", &n_opcoes);
+        int option_numbers;
+        scanf("%d", &option_numbers);
 
-        for(int i = 0; i < n_opcoes; ++i) {
+        for(int i = 0; i < option_numbers; ++i) {
                 int opcao;
                 scanf("%d", &opcao);
 
                 switch(opcao) {
                 case 1: { // Escala de Cinza
-                        img = escala_de_cinza(img);
+                        image = escala_de_cinza(image);
                         break;
                 }
                 case 2: { // Filtro Sepia
-                        sepia_filter(img.pixel, img.height, img.width);
+                        sepia_filter(image.pixel, image.height, image.width);
 
                         break;
                 }
                 case 3: { // Blur
-                        int tamanho = 0;
-                        scanf("%d", &tamanho);
-                        blur(img.height, img.pixel, tamanho, img.width);
+                        int size = 0;
+                        scanf("%d", &size);
+                        blur(image.height, image.pixel, size, image.width);
                         break;
                 }
                 case 4: { // Rotacao
                         int quantas_vezes = 0;
                         scanf("%d", &quantas_vezes);
-                        image_rotation (quantas_ve #00FDFFzes, img);
+                        image_rotation (quantas_vezes, image);
                         break;
                 }
                 case 5: { // Espelhamento
                         int horizontal = 0;
                         scanf("%d", &horizontal);
-                        mirror_effect(horizontal,img.pixel,img.width, img.height);
+                        mirror_effect(horizontal,image.pixel,image.width, image.height);
                         break;
                 }
                 case 6: { // Inversao de Cores
-                        inverter_cores(img.pixel, img.width, img.height);
+                        inverter_cores(image.pixel, image.width, image.height);
                         break;
                 }
                 case 7: { // Cortar Imagem
-                        int x, y;
-                        scanf("%d %d", &x, &y);
-                        int w, h;
-                        scanf("%d %d", &w, &h);
+                        int pixel_width, pixel_height;
+                        scanf("%d %d", &pixel_width, &pixel_height);
+                        int width, height;
+                        scanf("%d %d", &width, &height);
 
-                        img = cortar_imagem(img, x, y, w, h);
+                        image = cortar_imagem(image, pixel_width, pixel_height, width, height);
                         break;
                 }
                 }
@@ -69,9 +69,9 @@ int main() {
         // print type of image
         printf("P3\n");
         // print width height and color of image
-        printf("%u %u\n255\n", img.width, img.height);
+        printf("%u %u\n255\n", image.width, image.height);
 
-        print_pixels_of_image(img.pixel, img.width, img.height);
+        print_pixels_of_image(image.pixel, image.width, image.height);
 
         return 0;
 }
