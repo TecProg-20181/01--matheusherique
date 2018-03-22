@@ -1,17 +1,5 @@
 #include "photofilters.h"  /* Include the header (not strictly necessary here) */
 
-int max(int first_input, int second_input) {
-        int which_input = 0;
-
-        if (first_input > second_input) {
-                which_input = first_input;
-        } else {
-                which_input = second_input;
-        }
-
-        return which_input;
-}
-
 int pixel_igual(Pixel p1, Pixel p2) {
         int boolean = 0;
 
