@@ -51,7 +51,7 @@ int minimum_height (unsigned int height, unsigned int iterator, int T) {
 }
 
 int minimum_width (unsigned int width, unsigned int iterator, int T) {
-        int minimum = (width - 1 > iterator + T/2) ? iterator + T/2 : width - 1;
+        int minimum_width = (width - 1 > iterator + T/2) ? iterator + T/2 : width - 1;
 
         return minimum_width;
 }
@@ -62,15 +62,14 @@ void blur(unsigned int height, unsigned short int pixel[512][512][3], int T, uns
                         Pixel media = {0, 0, 0};
 
 
-                        for(int pixel_line = (0 > line - T/2 ? 0 : line - T/2); pixel_line <= minimum_height(height,line,T); ++pixel_line) {
-                                for(int pixel_column = (0 > column - T/2 ? 0 : column - T/2); pixel_column <= minimum_width(width,column,T); ++pixel_column) {
+                        for(int pixel_line = line - T/2; pixel_line <= minimum_height(height,line,T); ++pixel_line) {
+                                for(int pixel_column = column - T/2; pixel_column <= minimum_width(width,column,T); ++pixel_column) {
                                         media.red += pixel[pixel_line][pixel_column][RED_COLOR];
                                         media.green += pixel[pixel_line][pixel_column][GREEN_COLOR];
                                         media.blue += pixel[pixel_line][pixel_column][BLUE_COLOR];
                                 }
                         }
 
-                        // printf("%u", media.r)
                         media.red /= T * T;
                         media.green /= T * T;
                         media.blue /= T * T;
