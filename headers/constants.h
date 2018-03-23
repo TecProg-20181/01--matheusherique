@@ -1,3 +1,10 @@
+/**
+* This file is part of Photopobre project.
+* @file constants.h
+* @brief This file include all constants used in the project.
+*
+*/
+
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 

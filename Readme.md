@@ -102,3 +102,10 @@ $ gcc -o photopobre main photofilters calculations inputout
 $ cat lena/lena.ppm entrada.txt | ./photopobre > saida.ppm
 
 ```
+
+Para gcc no MacOS é necessário rodar este comando para compilar:
+
+```
+$ gcc-4.9 -std=c99 -o photopobre headers/* main.c -Iheaders
+
+```

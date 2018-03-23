@@ -1,78 +1,71 @@
+/**
+* This file is part of Photopobre project.
+* @file main.c
+* @brief This file the main of project. Include all functions used in others
+* header.
+*/
+
 #include <stdio.h>
 #include "photofilters.h"
 
 int main() {
         Image image;
+        image = read_pixels_of_image(image);
 
-        // read type of image
-        char p3[4];
-        scanf("%s", p3);
-        // read width height and color of image
-        int max_color;
-        scanf("%u %u %d", &image.width, &image.height, &max_color);
-
-        // read all pixels of image
-        read_pixels_of_image(image.pixel,image.width, image.height);
-
+        // Read one number to choose a image filter.
         int option_numbers;
         scanf("%d", &option_numbers);
 
 
         for(int iterator = 0; iterator < option_numbers; ++iterator) {
+                // Read one number to choose a image filter.
                 int option;
                 scanf("%d", &option);
 
                 switch(option) {
-                        case 1: {   // Escala de Cinza
-                                image = grey_scale(image);
+                        // Grayscale filter.
+                        case 1: {
+                                image = grayscale(image);
                                 break;
                         }
-                        case 2: {   // Filtro Sepia
-                                sepia_filter(image.pixel, image.height, image.width);
+                        // Sepia filter.
+                        case 2: {
+                                image = sepia_filter(image);
 
                                 break;
                         }
-                        case 3: {   // Blur
-                                int size = 0;
-                                scanf("%d", &size);
-                                blur(image.height, image.pixel, size, image.width);
+                        // Blur filter.
+                        case 3: {
+                                image = blur(image);
                                 break;
                         }
-                        case 4: {   // Rotacao
+                        // Rotate image.
+                        case 4: {
                                 int how_many_times = 0;
                                 scanf("%d", &how_many_times);
                                 image_rotation (how_many_times, image);
                                 break;
                         }
-                        case 5: {   // Espelhamento
-                                int horizontal = 0;
-                                scanf("%d", &horizontal);
-                                mirror_effect(horizontal,image.pixel,image.width, image.height);
+                        // Mirror effect filter.
+                        case 5: {
+                                image = mirror_effect(image);
                                 break;
                         }
-                        case 6: {   // Inversao de Cores
-                                color_invert(image.pixel, image.width, image.height);
+                        // Color invert filter.
+                        case 6: {
+                                image = color_invert(image);
                                 break;
                         }
-                        case 7: {   // Cortar Imagem
-                                int pixel_width, pixel_height;
-                                scanf("%d %d", &pixel_width, &pixel_height);
-                                int width, height;
-                                scanf("%d %d", &width, &height);
-
-                                image = cut_image(image, pixel_width, pixel_height, width, height);
+                        // Cut image.
+                        case 7: {
+                                image = cut_image(image);
                                 break;
                         }
                 }
 
         }
 
-        // print type of image
-        printf("P3\n");
-        // print width height and color of image
-        printf("%u %u\n255\n", image.width, image.height);
-
-        print_pixels_of_image(image.pixel, image.width, image.height);
+        print_pixels_of_image(image);
 
         return 0;
 }

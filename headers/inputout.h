@@ -1,14 +1,17 @@
-#ifndef INPUTOUT_H_  /* Include guard */
+/**
+* This file is part of Photopobre project.
+* @file inputout.h
+* @brief This file include all headers used for the inputs and output of project.
+*
+*/
+
+#ifndef INPUTOUT_H_
 #define INPUTOUT_H_
 #include "constants.h"
 #include "photofilters.h"
 
-void print_pixels_of_image(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
-                           unsigned int width,
-                           unsigned int height);
+void print_pixels_of_image(Image image);
 
-void read_pixels_of_image(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
-                          unsigned int width,
-                          unsigned int height);
+Image read_pixels_of_image(Image image);
 
 #endif
