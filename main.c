@@ -24,7 +24,7 @@ int main() {
 
                 switch(option) {
                         case 1: {   // Escala de Cinza
-                                image = escala_de_cinza(image);
+                                image = grey_scale(image);
                                 break;
                         }
                         case 2: {   // Filtro Sepia
@@ -39,9 +39,9 @@ int main() {
                                 break;
                         }
                         case 4: {   // Rotacao
-                                int quantas_vezes = 0;
-                                scanf("%d", &quantas_vezes);
-                                image_rotation (quantas_vezes, image);
+                                int how_many_times = 0;
+                                scanf("%d", &how_many_times);
+                                image_rotation (how_many_times, image);
                                 break;
                         }
                         case 5: {   // Espelhamento
@@ -51,7 +51,7 @@ int main() {
                                 break;
                         }
                         case 6: {   // Inversao de Cores
-                                inverter_cores(image.pixel, image.width, image.height);
+                                color_invert(image.pixel, image.width, image.height);
                                 break;
                         }
                         case 7: {   // Cortar Imagem
@@ -60,7 +60,7 @@ int main() {
                                 int width, height;
                                 scanf("%d %d", &width, &height);
 
-                                image = cortar_imagem(image, pixel_width, pixel_height, width, height);
+                                image = cut_image(image, pixel_width, pixel_height, width, height);
                                 break;
                         }
                 }
