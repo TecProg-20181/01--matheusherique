@@ -1,5 +1,4 @@
 #include "photofilters.h"  /* Include the header (not strictly necessary here) */
-#include "calculations.h"
 
 Image escala_de_cinza(Image img) {
 
@@ -18,23 +17,23 @@ Image escala_de_cinza(Image img) {
         return img;
 }
 
-void blur(unsigned int height, unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS], int T, unsigned int width) {
+void blur(unsigned int height, unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS], int size, unsigned int width) {
         for (unsigned int line = 0; line < height; ++line) {
                 for (unsigned int column = 0; column < width; ++column) {
                         Pixel media = {0, 0, 0};
 
 
-                        for(int pixel_line = line - T/2; pixel_line <= minimum_height(height,line,T); ++pixel_line) {
-                                for(int pixel_column = column - T/2; pixel_column <= minimum_width(width,column,T); ++pixel_column) {
+                        for(int pixel_line = line - size/2; pixel_line <= minimum_height(height,line,size); ++pixel_line) {
+                                for(int pixel_column = column - size/2; pixel_column <= minimum_width(width,column,size); ++pixel_column) {
                                         media.red += pixel[pixel_line][pixel_column][RED_COLOR];
                                         media.green += pixel[pixel_line][pixel_column][GREEN_COLOR];
                                         media.blue += pixel[pixel_line][pixel_column][BLUE_COLOR];
                                 }
                         }
 
-                        media.red /= T * T;
-                        media.green /= T * T;
-                        media.blue /= T * T;
+                        media.red /= size * size;
+                        media.green /= size * size;
+                        media.blue /= size * size;
 
                         pixel[line][column][RED_COLOR] = media.red;
                         pixel[line][column][GREEN_COLOR] = media.green;

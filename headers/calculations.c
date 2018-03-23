@@ -13,14 +13,26 @@ int minimum(int first_input, int second_input) {
 }
 
 
-int minimum_height (unsigned int height, unsigned int iterator, int T) {
-        int minimum_height = (height - 1 > iterator + T/2) ? iterator + T/2 : height - 1;
+int minimum_height (unsigned int height, unsigned int iterator, int size) {
+        int minimum_height = 0;
+
+        if (height - 1 > iterator + size/2) {
+                minimum_height = iterator + size/2;
+        } else {
+                minimum_height = height - 1;
+        }
 
         return minimum_height;
 }
 
-int minimum_width (unsigned int width, unsigned int iterator, int T) {
-        int minimum_width = (width - 1 > iterator + T/2) ? iterator + T/2 : width - 1;
+int minimum_width (unsigned int width, unsigned int iterator, int size) {
+        int minimum_width = 0;
+
+        if (width - 1 > iterator + size/2) {
+                minimum_width = iterator + size/2;
+        } else {
+                minimum_width = width - 1;
+        }
 
         return minimum_width;
 }
