@@ -24,27 +24,24 @@ typedef struct _image {
 } Image;
 
 void image_rotation (int quantas_vezes, Image img);
-void mirror_effect(int horizontal,unsigned short int pixel[512][512][3],
+void mirror_effect(int horizontal,unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                    unsigned int image_width,
                    unsigned int image_height);
-void sepia_filter(unsigned short int pixel[512][512][3],
+void sepia_filter(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                   unsigned int image_width,
                   unsigned int image_height);
-int minimum_width (unsigned int width, unsigned int iterator, int T);
-int minor_height (unsigned int height, unsigned int iterator, int T);
-int max(int a, int b);
 int pixel_igual(Pixel p1, Pixel p2);
 Image escala_de_cinza(Image img);
-void blur(unsigned int h, unsigned short int pixel[512][512][3], int T, unsigned int w);
+void blur(unsigned int h, unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS], int T, unsigned int w);
 Image rotacionar90direita(Image img);
-void inverter_cores(unsigned short int pixel[512][512][3],
+void inverter_cores(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                     unsigned int w, unsigned int h);
 Image cortar_imagem(Image img, int x, int y, int width, int height);
-void read_pixels_of_image(unsigned short int pixel[512][512][3],
+void read_pixels_of_image(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                           unsigned int width,
                           unsigned int height);
 
-void print_pixels_of_image(unsigned short int pixel[512][512][3],
+void print_pixels_of_image(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                            unsigned int w,
                            unsigned int h);
 

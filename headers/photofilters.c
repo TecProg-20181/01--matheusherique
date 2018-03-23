@@ -1,19 +1,5 @@
 #include "photofilters.h"  /* Include the header (not strictly necessary here) */
-
-int pixel_igual(Pixel p1, Pixel p2) {
-        int boolean = 0;
-
-        if (p1.red == p2.red &&
-            p1.green == p2.green &&
-            p1.blue == p2.blue) {
-                boolean = 1;
-        } else {
-                // Nothing to do.
-        }
-
-        return boolean;
-}
-
+#include "calculations.h"
 
 Image escala_de_cinza(Image img) {
 
@@ -32,19 +18,7 @@ Image escala_de_cinza(Image img) {
         return img;
 }
 
-int minimum_height (unsigned int height, unsigned int iterator, int T) {
-        int minimum_height = (height - 1 > iterator + T/2) ? iterator + T/2 : height - 1;
-
-        return minimum_height;
-}
-
-int minimum_width (unsigned int width, unsigned int iterator, int T) {
-        int minimum_width = (width - 1 > iterator + T/2) ? iterator + T/2 : width - 1;
-
-        return minimum_width;
-}
-
-void blur(unsigned int height, unsigned short int pixel[512][512][3], int T, unsigned int width) {
+void blur(unsigned int height, unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS], int T, unsigned int width) {
         for (unsigned int line = 0; line < height; ++line) {
                 for (unsigned int column = 0; column < width; ++column) {
                         Pixel media = {0, 0, 0};
@@ -75,18 +49,18 @@ Image rotacionar90direita(Image img) {
         rotacionada.width = img.height;
         rotacionada.height = img.width;
 
-        for (unsigned int i = 0, y = 0; i < rotacionada.height; ++i, ++y) {
-                for (int j = rotacionada.width - 1, x = 0; j >= 0; --j, ++x) {
-                        rotacionada.pixel[i][j][RED_COLOR] = img.pixel[x][y][RED_COLOR];
-                        rotacionada.pixel[i][j][GREEN_COLOR] = img.pixel[x][y][GREEN_COLOR];
-                        rotacionada.pixel[i][j][BLUE_COLOR] = img.pixel[x][y][BLUE_COLOR];
+        for (unsigned int row = 0, y = 0; row < rotacionada.height; ++row, ++y) {
+                for (int column = rotacionada.width - 1, x = 0; column >= 0; --column, ++x) {
+                        rotacionada.pixel[row][column][RED_COLOR] = img.pixel[x][y][RED_COLOR];
+                        rotacionada.pixel[row][column][GREEN_COLOR] = img.pixel[x][y][GREEN_COLOR];
+                        rotacionada.pixel[row][column][BLUE_COLOR] = img.pixel[x][y][BLUE_COLOR];
                 }
         }
 
         return rotacionada;
 }
 
-void inverter_cores(unsigned short int pixel[512][512][3],
+void inverter_cores(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                     unsigned int width, unsigned int height) {
         for (unsigned int line = 0; line < height; ++line) {
                 for (unsigned int column = 0; column < width; ++column) {
@@ -116,7 +90,7 @@ Image cortar_imagem(Image img, int pixel_width, int pixel_height, int width, int
         return cortada;
 }
 
-void sepia_filter(unsigned short int pixel[512][512][3], unsigned int image_width, unsigned int image_height) {
+void sepia_filter(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS], unsigned int image_width, unsigned int image_height) {
         for (unsigned int line = 0; line < image_height; ++line) {
                 for (unsigned int column = 0; column < image_width; ++column) {
                         Pixel pixel_color;
@@ -125,23 +99,21 @@ void sepia_filter(unsigned short int pixel[512][512][3], unsigned int image_widt
                         pixel_color.green = pixel[line][column][GREEN_COLOR];
                         pixel_color.blue = pixel[line][column][BLUE_COLOR];
 
-                        int p =  pixel_color.red * .393 + pixel_color.green * .769 + pixel_color.blue * .189;
-                        int menor_r = (255 >  p) ? p : 255;
-                        pixel[line][column][RED_COLOR] = menor_r;
+                        int sepia_filter =  pixel_color.red * .393 + pixel_color.green * .769 + pixel_color.blue * .189;
 
-                        p =  pixel_color.red * .349 + pixel_color.green * .686 + pixel_color.blue * .168;
-                        menor_r = (255 >  p) ? p : 255;
-                        pixel[line][column][GREEN_COLOR] = menor_r;
+                        pixel[line][column][RED_COLOR] = minimum(sepia_filter,255);
 
-                        p =  pixel_color.red * .272 + pixel_color.green * .534 + pixel_color.blue * .131;
-                        menor_r = (255 >  p) ? p : 255;
-                        pixel[line][column][BLUE_COLOR] = menor_r;
+                        sepia_filter =  pixel_color.red * .349 + pixel_color.green * .686 + pixel_color.blue * .168;
+                        pixel[line][column][GREEN_COLOR] = minimum(sepia_filter,255);
+
+                        sepia_filter =  pixel_color.red * .272 + pixel_color.green * .534 + pixel_color.blue * .131;
+                        pixel[line][column][BLUE_COLOR] = minimum(sepia_filter,255);
                 }
         }
 
 }
 
-void mirror_effect(int horizontal, unsigned short int pixel[512][512][3], unsigned int image_width, unsigned int image_height) {
+void mirror_effect(int horizontal, unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][3], unsigned int image_width, unsigned int image_height) {
         int width = image_width, height = image_height;
 
         if (horizontal == 1) {

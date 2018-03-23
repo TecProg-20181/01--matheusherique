@@ -3,7 +3,7 @@
 #include "photofilters.h"
 
 // print pixels of image
-void print_pixels_of_image(unsigned short int pixel[512][512][3],
+void print_pixels_of_image(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                            unsigned int width,
                            unsigned int height) {
 
@@ -18,7 +18,7 @@ void print_pixels_of_image(unsigned short int pixel[512][512][3],
         }
 }
 
-void read_pixels_of_image(unsigned short int pixel[512][512][3],
+void read_pixels_of_image(unsigned short int pixel[MAX_WIDTH][MAX_HEIGHT][MAX_RED_GREEN_BLUE_COLORS],
                           unsigned int width,
                           unsigned int height) {
 
